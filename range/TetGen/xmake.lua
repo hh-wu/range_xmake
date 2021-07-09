@@ -2,13 +2,9 @@ add_rules("mode.debug", "mode.release")
 
 target("TetGen")
     set_kind("static")
-    add_files("predicates.cxx")
-
-target("tetgen")
-    set_kind("binary")
-    add_files("tetgen.cxx")
-
-    add_deps("TetGen")
+    add_files("*.cxx")
+    add_headerfiles("*.h")
+    add_defines("TETLIBRARY")
 
 --
 -- If you want to known more usage about xmake, please see https://xmake.io

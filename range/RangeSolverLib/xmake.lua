@@ -13,7 +13,7 @@ target("RangeSolverLib")
     add_includedirs("../RangeBase/include")
     add_includedirs("../RangeModel/include")
 
-    add_files("src/*.cpp")
+    add_files("src/*.cpp","include/*.h")
     add_headerfiles("include/*.h")
     
     -- openmp
