@@ -2,3 +2,7 @@ build-
 build-*
 *.pro.user
 *~
+build/
+.vscode/
+.idea/
+.xmake/
