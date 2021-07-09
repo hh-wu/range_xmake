@@ -6,8 +6,9 @@ build by xmake
 ## Build & Install
 ### Windows
 ```
-$ cd range
-$ xmake
+git clone https://github.com/hh-wu/range_xmake.git
+cd range
+xmake
 ```
 ## Powered by
 
