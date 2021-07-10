@@ -38,7 +38,7 @@ Application::Application(int &argc, char **argv) :
     QApplication(argc,argv)
 {
     // Needed for printf functions family to work correctly.
-    setlocale(LC_ALL,"C");
+    // setlocale(LC_ALL,"C");
 
     MaterialList::initialize();
     Locker::initialize();

@@ -3,5 +3,5 @@ includes("RangeBase")
 includes("RangeModel")
 includes("RangeSolverLib")
 includes("RangeSolver")
-
+includes("Range")
 -- includes("RangeTests")
