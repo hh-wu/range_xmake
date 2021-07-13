@@ -6,6 +6,10 @@ target("TetGen")
     add_headerfiles("*.h")
     add_defines("TETLIBRARY")
 
+-- target("TetGen")
+--     set_kind("binary")
+--     add_files("*.cxx")
+--     add_headerfiles("*.h")
 --
 -- If you want to known more usage about xmake, please see https://xmake.io
 --
