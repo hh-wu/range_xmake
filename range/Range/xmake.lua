@@ -1,7 +1,12 @@
 add_rules("mode.debug", "mode.release")
 
 add_requires("libomp", {optional = true})
-add_requires("vcpkg::ffmpeg")
+
+if is_plat("windows") then 
+    add_requires("vcpkg::ffmpeg", {alias="ffmpeg"})
+else
+    add_requires("ffmpeg")
+end 
 
 target("Range")
     add_rules("qt.widgetapp")
@@ -29,7 +34,7 @@ target("Range")
         add_syslinks("strmiids", "mfplat", "mfuuid","Ws2_32", "Secur32", "Bcrypt")
     end
 
-    add_packages("vcpkg::ffmpeg")
+    add_packages("ffmpeg")
     add_links("avfilter", "avdevice", "avformat", "avcodec", "swscale", "swresample", "avutil")
     
     -- Qt framework
