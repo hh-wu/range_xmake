@@ -38,4 +38,4 @@ target("Range")
     add_links("avfilter", "avdevice", "avformat", "avcodec", "swscale", "swresample", "avutil")
     
     -- Qt framework
-    add_frameworks("QtCore","QtGui","QtNetwork","QtPrintSupport")
+    add_frameworks("QtCore","QtGui","QtNetwork","QtPrintSupport","OpenGLWidgets")

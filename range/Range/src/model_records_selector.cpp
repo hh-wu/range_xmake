@@ -82,93 +82,93 @@ ModelRecordsSelector::ModelRecordsSelector(QWidget *parent)
 
 void ModelRecordsSelector::createAnimation(bool modelID)
 {
-    Model &rModel = Session::getInstance().getModel(modelID);
+//    Model &rModel = Session::getInstance().getModel(modelID);
 
-    std::vector<double> &rTimes = rModel.getTimeSolver().getTimes();
+//    std::vector<double> &rTimes = rModel.getTimeSolver().getTimes();
 
-    QList<QString> imageFileNames;
+//    QList<QString> imageFileNames;
 
-    for (uint j=0;j<rTimes.size();j++)
-    {
-        QString recordFileName(RFileManager::getFileNameWithTimeStep(rModel.getFileName(),j+1));
-        QString imageFileName(RFileManager::getFileNameWithTimeStep(rModel.buildScreenShotFileName(),j+1));
-        if (RFileManager::fileExists(recordFileName) && RFileManager::fileExists(imageFileName))
-        {
-            imageFileNames.append(imageFileName);
-        }
-    }
+//    for (uint j=0;j<rTimes.size();j++)
+//    {
+//        QString recordFileName(RFileManager::getFileNameWithTimeStep(rModel.getFileName(),j+1));
+//        QString imageFileName(RFileManager::getFileNameWithTimeStep(rModel.buildScreenShotFileName(),j+1));
+//        if (RFileManager::fileExists(recordFileName) && RFileManager::fileExists(imageFileName))
+//        {
+//            imageFileNames.append(imageFileName);
+//        }
+//    }
 
-    if (imageFileNames.size() > 0)
-    {
-        QString fileName(rModel.buildAnimationFileName(this->videoSettings.getFormat()));
+//    if (imageFileNames.size() > 0)
+//    {
+//        QString fileName(rModel.buildAnimationFileName(this->videoSettings.getFormat()));
 
-        RLogger::info("Creating animation file \'%s\'\n",fileName.toUtf8().constData());
+//        RLogger::info("Creating animation file \'%s\'\n",fileName.toUtf8().constData());
 
-        VideoOutput videoOutput;
-        videoOutput.setStreamRate(this->videoSettings.getFps());
-        videoOutput.setResolution(this->videoSettings.getWidth(),this->videoSettings.getHeight());
-        if (!videoOutput.openMediaFile(this->videoSettings.getWidth(),this->videoSettings.getHeight(),fileName))
-        {
-            RLogger::error("Failed to create animation file \'%s\'\n",fileName.toUtf8().constData());
-            return;
-        }
+//        VideoOutput videoOutput;
+//        videoOutput.setStreamRate(this->videoSettings.getFps());
+//        videoOutput.setResolution(this->videoSettings.getWidth(),this->videoSettings.getHeight());
+//        if (!videoOutput.openMediaFile(this->videoSettings.getWidth(),this->videoSettings.getHeight(),fileName))
+//        {
+//            RLogger::error("Failed to create animation file \'%s\'\n",fileName.toUtf8().constData());
+//            return;
+//        }
 
-        uint cnt=0;
-        foreach (const QString &imageFileName, imageFileNames)
-        {
-            QImage image;
-            if (!image.load(imageFileName))
-            {
-                RLogger::error("Failed to load image file \'%s\'\n",imageFileName.toUtf8().constData());
-                return;
-            }
-            QImage sImage = image.scaled(this->videoSettings.getWidth(),this->videoSettings.getHeight(),Qt::KeepAspectRatio,Qt::SmoothTransformation);
-            if (sImage.isNull())
-            {
-                RLogger::error("Failed to scale image\n");
-                return;
-            }
-            if (sImage.height() > int(this->videoSettings.getHeight()))
-            {
-                sImage = image.scaled(this->videoSettings.getWidth(),this->videoSettings.getHeight(),Qt::KeepAspectRatioByExpanding,Qt::SmoothTransformation);
-                if (sImage.isNull())
-                {
-                    RLogger::error("Failed to scale image\n");
-                    return;
-                }
-            }
+//        uint cnt=0;
+//        foreach (const QString &imageFileName, imageFileNames)
+//        {
+//            QImage image;
+//            if (!image.load(imageFileName))
+//            {
+//                RLogger::error("Failed to load image file \'%s\'\n",imageFileName.toUtf8().constData());
+//                return;
+//            }
+//            QImage sImage = image.scaled(this->videoSettings.getWidth(),this->videoSettings.getHeight(),Qt::KeepAspectRatio,Qt::SmoothTransformation);
+//            if (sImage.isNull())
+//            {
+//                RLogger::error("Failed to scale image\n");
+//                return;
+//            }
+//            if (sImage.height() > int(this->videoSettings.getHeight()))
+//            {
+//                sImage = image.scaled(this->videoSettings.getWidth(),this->videoSettings.getHeight(),Qt::KeepAspectRatioByExpanding,Qt::SmoothTransformation);
+//                if (sImage.isNull())
+//                {
+//                    RLogger::error("Failed to scale image\n");
+//                    return;
+//                }
+//            }
 
-            QImage fImage(this->videoSettings.getWidth(),this->videoSettings.getHeight(),sImage.format());
-            QPainter painter;
-            painter.begin(&fImage);
-            painter.setBackground(QBrush(Qt::black));
-            painter.setBrush(QBrush(Qt::black));
-            painter.setPen(Qt::black);
-            painter.drawRect(0,0,this->videoSettings.getWidth(),this->videoSettings.getHeight());
-            painter.drawImage((this->videoSettings.getWidth()-sImage.width())/2,
-                              (this->videoSettings.getHeight()-sImage.height())/2,
-                              sImage);
-            painter.end();
+//            QImage fImage(this->videoSettings.getWidth(),this->videoSettings.getHeight(),sImage.format());
+//            QPainter painter;
+//            painter.begin(&fImage);
+//            painter.setBackground(QBrush(Qt::black));
+//            painter.setBrush(QBrush(Qt::black));
+//            painter.setPen(Qt::black);
+//            painter.drawRect(0,0,this->videoSettings.getWidth(),this->videoSettings.getHeight());
+//            painter.drawImage((this->videoSettings.getWidth()-sImage.width())/2,
+//                              (this->videoSettings.getHeight()-sImage.height())/2,
+//                              sImage);
+//            painter.end();
 
-            RLogger::info("Adding frame from image file \'%s\'\n",imageFileName.toUtf8().constData());
-            for (uint i=0;i<this->videoSettings.getFpp();i++)
-            {
-                if (!videoOutput.newFrame(fImage))
-                {
-                    RLogger::error("Failed to add frame from image file \'%s\'\n",imageFileName.toUtf8().constData());
-                    return;
-                }
-            }
-            RProgressPrint(cnt++,imageFileNames.size());
-        }
+//            RLogger::info("Adding frame from image file \'%s\'\n",imageFileName.toUtf8().constData());
+//            for (uint i=0;i<this->videoSettings.getFpp();i++)
+//            {
+//                if (!videoOutput.newFrame(fImage))
+//                {
+//                    RLogger::error("Failed to add frame from image file \'%s\'\n",imageFileName.toUtf8().constData());
+//                    return;
+//                }
+//            }
+//            RProgressPrint(cnt++,imageFileNames.size());
+//        }
 
-        if (!videoOutput.closeMediaFile())
-        {
-            RLogger::error("Failed to create animation file \'%s\'\n",fileName.toUtf8().constData());
-            return;
-        }
-        RLogger::info("Animation file \'%s\' created\n",fileName.toUtf8().constData());
-    }
+//        if (!videoOutput.closeMediaFile())
+//        {
+//            RLogger::error("Failed to create animation file \'%s\'\n",fileName.toUtf8().constData());
+//            return;
+//        }
+//        RLogger::info("Animation file \'%s\' created\n",fileName.toUtf8().constData());
+//    }
 }
 
 void ModelRecordsSelector::onRecordMarked(uint modelID, const QString &recordFileName)

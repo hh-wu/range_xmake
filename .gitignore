@@ -6,3 +6,6 @@ build/
 .vscode/
 .idea/
 .xmake/
+ffmpeg
+cmake-build-*
+vsxmake2019/
